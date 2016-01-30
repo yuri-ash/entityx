@@ -98,7 +98,7 @@ macro(create_test TARGET_NAME SOURCE)
         entityx
         ${ARGN}
         )
-    set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "entityx/tests")
+    set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "LibsExtern/entityx/tests")
 
     # Special case for benchmark tests
     if (${TARGET_NAME} MATCHES .*benchmark.*)
@@ -133,7 +133,7 @@ set(install_libs entityx)
 
 set(sources entityx/System.cc entityx/Event.cc entityx/Entity.cc entityx/help/Timer.cc entityx/help/Pool.cc)
 add_library(entityx STATIC ${sources})
-set_target_properties(entityx PROPERTIES DEBUG_POSTFIX -d FOLDER entityx)
+set_target_properties(entityx PROPERTIES DEBUG_POSTFIX -d FOLDER LibsExtern/entityx)
 
 if (ENTITYX_BUILD_SHARED)
     message("-- Building shared libraries (-DENTITYX_BUILD_SHARED=0 to only build static librarires)")
@@ -146,7 +146,7 @@ if (ENTITYX_BUILD_SHARED)
         DEBUG_POSTFIX -d
         VERSION ${ENTITYX_VERSION}
         SOVERSION ${ENTITYX_MAJOR_VERSION}
-        FOLDER entityx)
+        FOLDER LibsExtern/entityx)
     list(APPEND install_libs entityx_shared)
 endif (ENTITYX_BUILD_SHARED)
 
@@ -198,3 +198,5 @@ install(
     LIBRARY DESTINATION "${libdir}"
     ARCHIVE DESTINATION "${libdir}"
     )
+	
+set(GLOBAL_INCLUDE_PATH "${GLOBAL_INCLUDE_PATH};${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
