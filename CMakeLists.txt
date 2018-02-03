@@ -198,10 +198,4 @@ install(
     LIBRARY DESTINATION "${libdir}"
     ARCHIVE DESTINATION "${libdir}"
     )
-	
-#make variable available for parent scope
-get_directory_property(hasParent PARENT_DIRECTORY)
-if(hasParent)
-	set(GLOBAL_INCLUDE_PATH "${GLOBAL_INCLUDE_PATH};${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
-	set(GLOBAL_LIBRARIES "${GLOBAL_LIBRARIES};entityx" PARENT_SCOPE)
-endif()
+
