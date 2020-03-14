@@ -124,6 +124,18 @@ class SystemManager : entityx::help::NonCopyable {
   }
 
   /**
+   * Check if System was added to the SystemManager.
+   *
+   * eg.
+   * if ( system.has<MovementSystem>() ) { ... }
+   */
+  template <typename S>
+  bool has() {
+	  auto it = systems_.find( S::family() );
+	  return it != systems_.end() ? true : false;
+  }
+
+  /**
    * Retrieve the registered System instance, if any.
    *
    *   std::shared_ptr<CollisionSystem> collisions = systems.system<CollisionSystem>();
